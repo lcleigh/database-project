@@ -1,4 +1,4 @@
-# Artists Model and Repository Classes Design Recipe
+# Albums Model and Repository Classes Design Recipe
 
 _Copy this recipe template to design and implement Model and Repository classes for a database table._
 
@@ -13,10 +13,10 @@ Otherwise, [follow this recipe to design and create the SQL schema for your tabl
 ```
 # EXAMPLE
 
-Table: students
+Table: albums
 
 Columns:
-id | name | cohort_name
+id | name | release_year
 ```
 
 ## 2. Create Test SQL seeds
