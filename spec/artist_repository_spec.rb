@@ -15,8 +15,23 @@ RSpec.describe ArtistRepository do
     it "returns the lit of artists" do
         repo = ArtistRepository.new
         artists = repo.all
-        expect(artists.length).to eq 2
+        expect(artists.length).to eq 3
         expect(artists.first.id).to eq '1'
         expect(artists.first.name).to eq 'Pixies'
     end
+
+    it "returns the Pixies as single artist" do
+        repo = ArtistRepository.new
+        artist = repo.find(1)
+        expect(artist.name).to eq 'Pixies'
+        expect(artist.genre).to eq 'Rock'
+    end
+
+    it "returns Tylor Swift as single artist" do
+        repo = ArtistRepository.new
+        artist = repo.find(3)
+        expect(artist.name).to eq 'Taylor Swift'
+        expect(artist.genre).to eq 'Pop'
+    end
+
 end

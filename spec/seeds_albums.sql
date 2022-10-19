@@ -4,11 +4,10 @@
 -- so we can start with a fresh state.
 -- (RESTART IDENTITY resets the primary key)
 
-TRUNCATE TABLE artists RESTART IDENTITY; -- replace with your own table name.
+TRUNCATE TABLE albums RESTART IDENTITY; -- replace with your own table name.
 
 -- Below this line there should only be `INSERT` statements.
 -- Replace these statements with your own seed data.
 
-INSERT INTO artists (name, genre) VALUES ('Pixies', 'Rock');
-INSERT INTO artists (name, genre) VALUES ('ABBA', 'Pop');
-INSERT INTO artists (name, genre) VALUES ('Taylor Swift', 'Pop');
+INSERT INTO albums (title, release_year, artist_id) VALUES ('Spice', 1996, '1');
+INSERT INTO albums (title, release_year, artist_id) VALUES ('Madman Across the Water', 1971, '2');

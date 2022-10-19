@@ -2,7 +2,7 @@
 
 _Copy this recipe template to design and implement Model and Repository classes for a database table._
 
-X## 1. Design and create the Table
+## 1. Design and create the Table
 
 If the table is already created in the database, you can skip this step.
 
@@ -82,7 +82,7 @@ Define the attributes of your Model class. You can usually map the table columns
 # Model class
 # (in lib/artist.rb)
 
-class Student
+class Artist
 
   # Replace the attributes by your own columns.
   attr_accessor :id, :name, :genre
@@ -122,6 +122,15 @@ class ArtistRepository
 
     # Returns an array of Artist objects.
   end
+  # Select a single record
+  # given the id in an argument (a number)
+  def find(id)
+    # Executes the SQL query:
+    # SELECT id, name, genre FROM artists WHERE id = $1
+
+    # Returns a single Artist object
+    
+  end
 
 end
 ```
@@ -141,9 +150,27 @@ These examples will later be encoded as RSpec tests.
 repo = ArtistRepository.new
 
 artists = repo.all
-artists.length => 2
+artists.length => 3
 artists.first.id => '1'
 artists.first.name => 'Pixies'
+
+# 2
+# Get a single Artist
+
+repo = ArtistRepository.new
+
+artist = repo.find(1)
+artist.name => "Pixies"
+artist.genre => "Rock"
+
+# 3
+# Get another single artist
+
+repo = ArtistRepository.new
+
+artist = repo.find(3)
+artist.name => "Taylor Swift"
+artist.genre => "Pop"
 
 # Add more examples for each method
 ```

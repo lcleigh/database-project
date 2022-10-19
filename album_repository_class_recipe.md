@@ -35,13 +35,13 @@ If seed data is provided (or you already created it), you can skip this step.
 -- so we can start with a fresh state.
 -- (RESTART IDENTITY resets the primary key)
 
-TRUNCATE TABLE students RESTART IDENTITY; -- replace with your own table name.
+TRUNCATE TABLE albums RESTART IDENTITY; -- replace with your own table name.
 
 -- Below this line there should only be `INSERT` statements.
 -- Replace these statements with your own seed data.
 
-INSERT INTO students (name, cohort_name) VALUES ('David', 'April 2022');
-INSERT INTO students (name, cohort_name) VALUES ('Anna', 'May 2022');
+INSERT INTO albums (title, release_year, artist_id) VALUES ('My Title 1', 1978, '2');
+INSERT INTO albums (title, release_year, artist_id) VALUES ('My Title 2', 1979, '2');
 ```
 
 Run this SQL file on the database to truncate (empty) the table, and insert the seed data. Be mindful of the fact any existing records in the table will be deleted.
@@ -60,12 +60,12 @@ Usually, the Model class name will be the capitalised table name (single instead
 
 # Model class
 # (in lib/artist.rb)
-class Artist
+class Album
 end
 
 # Repository class
 
-class ArtistRepository
+class AlbumRepository
 end
 
 
@@ -82,10 +82,10 @@ Define the attributes of your Model class. You can usually map the table columns
 # Model class
 # (in lib/artist.rb)
 
-class Student
+class Album
 
   # Replace the attributes by your own columns.
-  attr_accessor :id, :name, :genre
+  attr_accessor :title, :release_year, :artist_id
 end
 
 # The keyword attr_accessor is a special Ruby feature
@@ -107,12 +107,12 @@ Using comments, define the method signatures (arguments and return value) and wh
 
 ```ruby
 # EXAMPLE
-# Table name: artists
+# Table name: album
 
 # Repository class
-# (in lib/artist_repository.rb)
+# (in lib/album_repository.rb)
 
-class ArtistRepository
+class AlbumRepository
 
   # Selecting all records
   # No arguments
@@ -121,6 +121,15 @@ class ArtistRepository
     # SELECT id, name, genre FROM artists;
 
     # Returns an array of Artist objects.
+  end
+  # selects a single record
+  # take id an an argumet
+  def find(id)
+    # Executes the SQL query
+    # SELECT id, title, release_year, artist id FROM albums;
+
+    # Returns a single album object
+
   end
 
 end
@@ -136,14 +145,38 @@ These examples will later be encoded as RSpec tests.
 # EXAMPLES
 
 # 1
-# Get all artists
+# Get all albums
 
-repo = ArtistRepository.new
+repo = AlbumRepository.new
 
-artists = repo.all
-artists.length => 2
-artists.first.id => '1'
-artists.first.name => 'Pixies'
+albums = repo.all
+albums.length => 2
+albums.first.id => '1'
+albums.first.title => 'My Title 1'
+albums.first.release_year => 1978
+albums.first.artist_id => '2'
+
+
+# 2
+# get a single album
+
+repo = AlbumRepository.new
+
+album = repo.find(1)
+album.title => "Spice"
+album.release_year => "1996"
+album.artist_id => "1"
+
+# 2
+# get a single album
+
+repo = AlbumRepository.new
+
+album = repo.find(2)
+album.title => "Madman Across the Water"
+album.release_year => "1971"
+album.artist_id => "2"
+
 
 # Add more examples for each method
 ```
