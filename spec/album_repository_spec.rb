@@ -40,6 +40,19 @@ RSpec.describe AlbumRepository do
         expect(album.artist_id).to eq '2'
     end
 
+    it "creates a single album" do
+        repo = AlbumRepository.new
+
+        album = Album.new
+        album.title = "Stripped"
+        album.release_year = "2002"
+
+        repo.create(album)
+
+        albums = repo.all
+        expect(albums.last.title).to eq "Stripped"
+        expect(albums.last.release_year).to eq "2002"
+    end
 end
 
 

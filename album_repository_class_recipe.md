@@ -132,6 +132,13 @@ class AlbumRepository
 
   end
 
+  def create(album)
+    # Executes the SQL query
+    # INSERT INTO albums (title, release_year) VALUES ($1, $2);
+
+    # returns nil
+  end
+
 end
 ```
 
