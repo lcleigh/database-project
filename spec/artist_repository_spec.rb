@@ -34,4 +34,74 @@ RSpec.describe ArtistRepository do
         expect(artist.genre).to eq 'Pop'
     end
 
+    it "creates a new artist" do
+        repo = ArtistRepository.new
+
+        new_artist = Artist.new
+        new_artist.name = "Britney Spears"
+        new_artist.genre = "Pop"
+
+        repo.create(new_artist)
+
+        artists = repo.all
+        expect(artists.last.name).to eq "Britney Spears"
+        expect(artists.last.genre).to eq "Pop"
+
+    end
+
+    it "deletes an artist" do
+        repo = ArtistRepository.new
+
+        id_to_delete = 1
+
+        repo.delete(id_to_delete)
+
+        all_artists = repo.all
+        expect(all_artists.length).to eq 2
+        expect(all_artists.first.id).to eq '2'
+    end
+
+    it "deletes the first two artists" do
+        repo = ArtistRepository.new
+
+        repo.delete(1)
+        repo.delete(2)
+
+        all_artists = repo.all
+        expect(all_artists.length).to eq 1
+        expect(all_artists.first.id).to eq '3'
+    end
+
+    it "updates an artist with new values" do
+        repo = ArtistRepository.new
+
+        artist = repo.find(1)
+
+        artist.name = "Gloria Gaynor"
+        artist.genre = "Disco"
+
+        repo.update(artist)
+
+        updated_artist = repo.find(1)
+
+        expect(updated_artist.name).to eq "Gloria Gaynor"
+        expect(updated_artist.genre).to eq "Disco"
+    end
+
+    it "updates an artist with a new name only" do
+        repo = ArtistRepository.new
+
+        artist = repo.find(1)
+
+        artist.name = "Gloria Gaynor"
+        
+
+        repo.update(artist)
+
+        updated_artist = repo.find(1)
+        
+        expect(updated_artist.name).to eq "Gloria Gaynor"
+        expect(updated_artist.genre).to eq "Rock"
+    end
+
 end

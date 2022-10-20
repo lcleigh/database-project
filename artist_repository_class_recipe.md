@@ -132,6 +132,36 @@ class ArtistRepository
     
   end
 
+  # insert a new artist record
+  # takes and Artist object as an argument
+  def create(artist)
+    # Executes the SQL query:
+    # INSERT INTO artists (name, genre) VALUES ($1, $2);
+   
+   # doesn't need to return anything - we are just creating
+  end
+
+
+  # deletes an artist record
+  #given it's id
+  def delete(id)
+    # Executes the sql:
+    # DELETE FROM artists WHERE id = $1;
+
+    # returns nothing - it deletes the record
+
+  end
+
+
+  # Updates an artist record
+  # Takes an artist object (with updated fields)
+  def update(artist)
+    # Executes the SQL:
+    # UPDATE artists SET name = $1, genre = $2, WHERE id = $3;
+
+    # returns nothing (only updates the record)
+  end
+
 end
 ```
 
@@ -171,6 +201,45 @@ repo = ArtistRepository.new
 artist = repo.find(3)
 artist.name => "Taylor Swift"
 artist.genre => "Pop"
+
+# 4
+# Create a new artist
+repo = ArtistRepository.new
+
+artist = Artist.new
+artist.name => "Britney Spears"
+artist.genre => "Pop"
+
+repo.create(artist) => nil
+
+artists.repo.all
+artists.last.name => "Britney Spears"
+
+# 5
+# Delete a artist
+repo = ArtistRepository.new
+
+id_to_delete = 1
+
+repo.delete(id_to _delete)
+
+all_artists = repo.all
+all_artists.length => 2
+all_artists.fisrt.id => '2'
+
+# 6 
+# update an artist
+repo = ArtistRepository.new
+
+artist = repo.find(1)
+
+artist.name = "Gloria Gaynor"
+artist.genre = "Disco"
+
+repo.update(artist)
+updated_artist = repo.find(1)
+updated_artist.name => "Gloria Gaynor"
+updated_artist.genre => "Disco"
 
 # Add more examples for each method
 ```
